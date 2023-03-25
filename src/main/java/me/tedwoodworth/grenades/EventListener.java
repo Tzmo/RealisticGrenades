@@ -900,8 +900,12 @@ public class EventListener implements Listener {
         var action = event.getAction();
         var player = event.getPlayer();
         if (manager.isGrenade(item) && (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)) {
-            if (!throwerSet.contains(player)) {
-                Bukkit.getScheduler().runTaskLater(plugin, () -> grenadeUse(item, action, player, event.getHand()), 2L);
+            if (ConfigManager.getInstance().getConfig().getStringList("allowed-worlds").stream().noneMatch(x -> x.equalsIgnoreCase(player.getWorld().getName()))) {
+                player.sendMessage(ChatColor.DARK_RED + "[!] " + ChatColor.RED + "You cannot use this in this world.");
+            } else {
+                if (!throwerSet.contains(player)) {
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> grenadeUse(item, action, player, event.getHand()), 2L);
+                }
             }
             event.setCancelled(true);
         }

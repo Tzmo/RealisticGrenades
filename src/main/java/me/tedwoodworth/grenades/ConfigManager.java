@@ -469,4 +469,8 @@ public class ConfigManager {
         }
         plugin.saveConfig();
     }
+
+    public FileConfiguration getConfig() {
+        return config;
+    }
 }

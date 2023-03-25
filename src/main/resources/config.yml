@@ -1,6 +1,8 @@
 calculations-per-tick: 20
 smoke-thickness: 1.0
 grenade-menu-title: '&8&lGrenades'
+allowed-worlds:
+  - EXAMPLE_WORLD
 grenades:
   frag_grenade:
     name: '&2Frag Grenade'
